@@ -5,6 +5,9 @@ import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzButtonModule} from 'ng-zorro-antd/button';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {RouterService} from '../../_services/router.service';
+import {NzIconService} from 'ng-zorro-antd/icon';
+import {LockOutline, UserOutline} from '@ant-design/icons-angular/icons';
+import {ClientService} from '../../_services/client.service';
 
 @Component({
   selector: 'app-login',
@@ -23,8 +26,11 @@ import {RouterService} from '../../_services/router.service';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
+  constructor(private clientService: ClientService,
+              private fb: FormBuilder,
+              private iconService: NzIconService,
               private routerService: RouterService) {
+    this.iconService.addIcon(LockOutline, UserOutline);
     this.loginForm = this.fb.group({
       mail: ['', [Validators.email, Validators.required]],
       password: ['', Validators.required]
@@ -33,7 +39,10 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
-      this.routerService.routeToLobby();
+      this.clientService.login().subscribe((response) => {
+        console.log(response);
+        this.routerService.routeToLobby();
+      })
     } else {
       Object.values(this.loginForm.controls).forEach((control) => {
         control.markAsDirty();

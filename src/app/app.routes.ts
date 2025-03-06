@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import {LoginComponent} from './pages/login/login.component';
 import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {LobbyComponent} from './pages/lobby/lobby.component';
+import {privateGuard} from './_guards/private.guard';
 
 export const routes: Routes = [
   {
@@ -15,7 +16,8 @@ export const routes: Routes = [
   },
   {
     path: 'lobby',
-    component: LobbyComponent
+    component: LobbyComponent,
+    canActivate: [privateGuard]
   },
   {
     path: '**',
