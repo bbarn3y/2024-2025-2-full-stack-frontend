@@ -16,7 +16,9 @@ export const routes: Routes = [
   },
   {
     path: 'lobby',
-    component: LobbyComponent,
+    // component: LobbyComponent,
+    loadChildren: () =>
+      import('./pages/lobby/inner.module').then((m) => m.InnerModule),
     canActivate: [privateGuard]
   },
   {

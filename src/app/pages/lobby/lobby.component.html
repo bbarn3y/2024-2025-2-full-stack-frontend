@@ -1,13 +1,6 @@
-<input #searchInput nz-input placeholder="Search characters..." />
+<app-character-listing></app-character-listing>
 
-<!-- <div *ngFor="let character of characters"> -->
-@for (character of filteredCharacters; track character.id) {
-  <nz-card style="width: 300px"
-           [nzCover]="character.image ? imageTemplate : undefined"
-           [nzTitle]="character.name"></nz-card>
-
-  <ng-template #imageTemplate>
-    <img *ngIf="character.image"
-         [alt]="character.name" [src]="character.image"/>
-  </ng-template>
-}
+<button nz-button
+        (click)="userService.removeSession(); routerService.routeToLogin()">
+  Logout
+</button>

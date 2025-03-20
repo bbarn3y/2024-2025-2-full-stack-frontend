@@ -1,0 +1,6 @@
+<input #searchInput nz-input placeholder="Search characters..." />
+
+<!-- <div *ngFor="let character of characters"> -->
+@for (character of filteredCharacters; track character.id) {
+  <app-character-card [character]="character"></app-character-card>
+}

@@ -1,0 +1,8 @@
+<nz-card style="width: 300px"
+         [nzCover]="character.image ? imageTemplate : undefined"
+         [nzTitle]="character.name"></nz-card>
+
+<ng-template #imageTemplate>
+  <img *ngIf="character.image"
+       [alt]="character.name" [src]="character.image"/>
+</ng-template>
