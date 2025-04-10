@@ -1,8 +1,17 @@
 <nz-card style="width: 300px"
+         [nzActions]="[selectionActionTemplate]"
          [nzCover]="character.image ? imageTemplate : undefined"
-         [nzTitle]="character.name"></nz-card>
+         [nzTitle]="character | characterName : ';'"></nz-card>
+
+<ng-template #selectionActionTemplate>
+  <span nz-icon nzType="edit" (click)="characterSelected.emit(character)"></span>
+</ng-template>
 
 <ng-template #imageTemplate>
   <img *ngIf="character.image"
        [alt]="character.name" [src]="character.image"/>
+
+  <div>
+    Created: {{ character.created | date: 'YYYY.MM.dd. HH:mm' }}
+  </div>
 </ng-template>

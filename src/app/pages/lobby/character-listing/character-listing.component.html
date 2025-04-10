@@ -1,6 +1,16 @@
-<input #searchInput nz-input placeholder="Search characters..." />
+@if (isLoading) {
+  <nz-skeleton-element nzType="image" [nzActive]="true"></nz-skeleton-element>
+} @else {
+  <input #searchInput nz-input placeholder="Search characters..." />
 
-<!-- <div *ngFor="let character of characters"> -->
-@for (character of filteredCharacters; track character.id) {
-  <app-character-card [character]="character"></app-character-card>
+  <!-- <div *ngFor="let character of characters"> -->
+  @for (character of filteredCharacters; track character.id) {
+    <app-character-card
+      [character]="character"
+      appSelectedCharacter
+      [color]="CharacterClassDetails[character.characterClass].color"
+      [selected]="selectedCharacter?.id === character.id"
+      (characterSelected)="selectedCharacter = $event"
+    ></app-character-card>
+  }
 }
